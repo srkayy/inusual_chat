@@ -1,9 +1,5 @@
 # Inusualchat — UML Diagrams
 
-Diagramas em [Mermaid](https://mermaid.js.org/) — renderizados automaticamente no GitHub.
-
----
-
 ## 1. Diagrama de Classes
 
 ```mermaid
