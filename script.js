@@ -1,4 +1,3 @@
-// ── Utilities ──────────────────────────────────────────────────────────────
 
 function escapeHtml(str) {
   return String(str)
@@ -24,8 +23,6 @@ function relativeTime(ts) {
   if (diff < 3600) return `${Math.floor(diff/60)}min`;
   return `${Math.floor(diff/3600)}h`;
 }
-
-// ── Toast ──────────────────────────────────────────────────────────────────
 
 function showToast(message, type = 'info') {
   const container = document.getElementById('toast-wrap');
@@ -61,19 +58,12 @@ const savedTheme = (function(){ try { return localStorage.getItem('theme'); } ca
 setTheme(savedTheme === 'dark');
 
 
-// ── Username & name uniqueness ─────────────────────────────────────────────
-// In a real multi-user setup this would be server-side via Socket.io.
-// Here we simulate it with a BroadcastChannel (works across tabs on same origin)
-// so two tabs can't claim the same name.
-
 const usernameInput  = document.getElementById('username-input');
 const usernameStatus = document.getElementById('username-status');
 
-// Set of names currently "claimed" by other tabs (populated via BroadcastChannel)
 const otherTabNames = new Set();
 let myRegisteredName = null;
 
-// BroadcastChannel lets tabs on the same origin communicate
 let bc;
 try { bc = new BroadcastChannel('inusualchat_names'); } catch { bc = null; }
 
@@ -81,7 +71,6 @@ if (bc) {
   bc.onmessage = (e) => {
     if (e.data.type === 'claim')   otherTabNames.add(e.data.name.toLowerCase());
     if (e.data.type === 'release') otherTabNames.delete(e.data.name.toLowerCase());
-    // Re-validate current input if another tab just claimed a name
     validateUsername(usernameInput.value.trim());
   };
 }
@@ -140,11 +129,9 @@ usernameInput.addEventListener('change', () => {
   try { localStorage.setItem('username', name); } catch {}
 });
 
-// Restore saved username
 const savedUsername = (function(){ try { return localStorage.getItem('username'); } catch { return null; } })();
 if (savedUsername) {
   usernameInput.value = savedUsername;
-  // Small delay so BroadcastChannel listeners from other tabs can register first
   setTimeout(() => {
     if (!isNameTaken(savedUsername)) {
       claimName(savedUsername);
@@ -160,7 +147,6 @@ function getCurrentUsername() {
   return usernameInput.value.trim() || 'Anônimo';
 }
 
-// ── Chat ───────────────────────────────────────────────────────────────────
 
 const chatInput    = document.getElementById('chat-input');
 const enviarBtn    = document.getElementById('enviar-btn');
@@ -216,7 +202,6 @@ enviarBtn.addEventListener('click', sendMessage);
 chatInput.addEventListener('keypress', e => { if (e.key === 'Enter') sendMessage(); });
 
 
-// ── Video URL validation ───────────────────────────────────────────────────
 
 function extractVideoId(url) {
   const regex = /(?:youtube\.com\/(?:[^/]+\/.+\/|\?v=|v\/)|youtu\.be\/)([^&?#\s]{11})/;
@@ -225,7 +210,6 @@ function extractVideoId(url) {
 }
 
 function isMp4Url(url) {
-  // Accept direct .mp4 URLs or URLs with ?...format=mp4 etc.
   return /\.mp4(\?|$|#)/i.test(url) || /video\/mp4/i.test(url);
 }
 
@@ -238,7 +222,6 @@ function classifyUrl(url) {
   return null;
 }
 
-// ── Player ─────────────────────────────────────────────────────────────────
 
 const ytPlayer   = document.getElementById('youtube-player');
 const mp4Player  = document.getElementById('mp4-player');
@@ -268,7 +251,6 @@ function updatePlayer(item) {
   }
 }
 
-// ── Playlist ───────────────────────────────────────────────────────────────
 
 const urlInput         = document.getElementById('video-url-input');
 const addVideoBtn      = document.getElementById('add-video-btn');
@@ -291,7 +273,7 @@ async function fetchYouTubeTitle(videoId) {
 
 function thumbFor(item) {
   if (item.type === 'youtube') return `https://img.youtube.com/vi/${item.id}/mqdefault.jpg`;
-  return ''; // no thumbnail for mp4
+  return '';
 }
 
 function renderPlaylist() {
@@ -394,13 +376,11 @@ function playFromPlaylist(idx) {
   renderPlaylist();
 }
 
-// Auto-advance: YouTube end event
 window.addEventListener('message', e => {
   if (!e.data || typeof e.data !== 'string') return;
   if (e.data.includes('"event":"onStateChange"') && e.data.includes('"data":0')) advance();
 });
 
-// Auto-advance: MP4 end event
 mp4Player.addEventListener('ended', advance);
 
 function advance() {
@@ -415,7 +395,6 @@ function advance() {
   }
 }
 
-// Add video
 function handleAddVideo() {
   const url = urlInput.value.trim();
   if (url) { addToPlaylist(url); urlInput.value = ''; }
