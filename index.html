@@ -57,7 +57,6 @@
       clip: rect(0,0,0,0); white-space: nowrap; border: 0;
     }
 
-    /* ── App wrapper ── */
     .app {
       max-width: 1280px;
       margin: 0 auto;
@@ -66,7 +65,6 @@
       gap: 14px;
     }
 
-    /* ── Glass panel ── */
     .panel {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -75,7 +73,6 @@
       overflow: hidden;
     }
 
-    /* ── Header ── */
     .header {
       display: flex;
       align-items: center;
@@ -134,7 +131,6 @@
 
     .icon-btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
 
-    /* ── Main layout ── */
     .main {
       display: grid;
       grid-template-columns: 1fr 300px;
@@ -142,10 +138,8 @@
       align-items: start;
     }
 
-    /* ── Video column ── */
     .video-col { display: flex; flex-direction: column; gap: 14px; }
 
-    /* URL bar */
     .url-bar {
       display: flex;
       gap: 8px;
@@ -195,7 +189,6 @@
     .btn-add:hover { background: var(--primary-dark); }
     .btn-add:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
 
-    /* Player */
     .player-wrap {
       width: 100%;
       aspect-ratio: 16/9;
@@ -211,7 +204,6 @@
       border: none;
     }
 
-    /* Playlist */
     .playlist-header {
       display: flex;
       align-items: center;
@@ -315,14 +307,12 @@
       border: 1px solid var(--border);
     }
 
-    /* ── Right column ── */
     .right-col {
       display: flex;
       flex-direction: column;
       gap: 14px;
     }
 
-    /* User card */
     .user-card {
       display: flex;
       align-items: center;
@@ -371,7 +361,6 @@
     .username-status.ok   { color: var(--accent); }
     .username-status.err  { color: #EF4444; }
 
-    /* Chat panel */
     .chat-panel {
       display: flex;
       flex-direction: column;
@@ -511,7 +500,6 @@
     #enviar-btn:hover { background: var(--primary-dark); }
     #enviar-btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
 
-    /* Toast */
     #toast-wrap {
       position: fixed;
       bottom: 20px;
@@ -542,7 +530,6 @@
 
     @keyframes slideIn { from{opacity:0;transform:translateX(16px)} to{opacity:1;transform:translateX(0)} }
 
-    /* Responsive */
     @media (max-width: 860px) {
       .main { grid-template-columns: 1fr; }
       .chat-panel { height: 360px; }
@@ -576,13 +563,10 @@
     </div>
   </header>
 
-  <!-- Main -->
   <div class="main">
 
-    <!-- Video column -->
     <div class="video-col">
 
-      <!-- URL input -->
       <div class="panel url-bar">
         <label for="video-url-input" class="sr-only">URL do YouTube</label>
         <input type="url" id="video-url-input" placeholder="Cole link do YouTube ou URL de vídeo .mp4..." autocomplete="off">
@@ -592,7 +576,6 @@
         </button>
       </div>
 
-      <!-- Player -->
       <div class="panel player-wrap" id="player-wrap">
         <iframe id="youtube-player" src="" frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -600,7 +583,6 @@
         <video id="mp4-player" controls style="display:none;width:100%;height:100%;background:#000;" title="Player de vídeo"></video>
       </div>
 
-      <!-- Playlist -->
       <div class="panel">
         <div class="playlist-header">
           <span>Fila de reprodução</span>
@@ -611,17 +593,14 @@
 
     </div>
 
-    <!-- Right column -->
     <div class="right-col">
 
-      <!-- User -->
       <div class="panel user-card">
         <label for="username-input" class="sr-only">Seu nome</label>
         <input type="text" id="username-input" placeholder="Digite seu nome para entrar no chat..." maxlength="32" autocomplete="nickname">
         <span id="username-status" class="username-status" aria-live="polite"></span>
       </div>
 
-      <!-- Chat -->
       <div class="panel chat-panel">
         <div class="chat-head">
           <div class="chat-title">
