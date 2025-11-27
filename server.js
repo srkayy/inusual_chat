@@ -13,7 +13,6 @@ const MIME = {
 };
 
 const server = http.createServer((req, res) => {
-  // Stub socket.io so the page loads without a real server
   if (req.url === '/socket.io/socket.io.js') {
     res.writeHead(200, { 'Content-Type': 'text/javascript' });
     res.end('// socket.io stub\nwindow.io = function(){ return { on(){}, emit(){}, connect(){} }; };');
