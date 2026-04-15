@@ -87,3 +87,11 @@ O arquivo [`UML.md`](./UML.md) contém diagramas Mermaid detalhando:
 - Fluxos de Sequência (envio de mensagem, adição de vídeo, unicidade de nome)
 - Diagrama de Componentes
 - Diagrama de Estados do Player
+
+---
+
+## Autor
+
+Desenvolvido como projeto acadêmico de Laboratório de Computadores e Sociedade na Universidade Estudual do Rio Grande do Norte (UERN) pelos estudantes Wilton Carlos J. da C. Filho e Kerlison Kennedy de O. Silva. Segue link do GitHub dos autores em ordem de apresentação:
+https://github.com/Folhus
+https://github.com/kerlisonz
